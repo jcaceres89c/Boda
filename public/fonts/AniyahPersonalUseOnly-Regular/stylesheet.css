@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Aniyah Personal Use Only';
+    src: url('AniyahPersonalUseOnly-Regular.woff2') format('woff2'),
+        url('AniyahPersonalUseOnly-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

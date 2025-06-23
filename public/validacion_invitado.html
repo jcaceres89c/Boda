@@ -1,0 +1,24 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Confirmación de asistencia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/common.css" />
+</head>
+<body class="bg-white text-gray-800 flex flex-col items-center justify-center min-h-screen p-4">
+  <h1 class="text-4xl font-bold mb-6 text-center">Confirma tu asistencia</h1>
+
+  <form id="confirm-form" class="w-full max-w-md bg-gray-100 p-6 rounded shadow">
+    <label for="name-input" class="block text-lg font-semibold mb-2">Escribe tu nombre tal como aparece en la invitación:</label>
+    <input type="text" id="name-input" class="w-full p-2 border border-gray-300 rounded mb-4" />
+    <p id="error-message" class="text-red-600 text-sm mb-4"></p>
+    <button type="submit" class="w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700 transition">Ver invitación</button>
+  </form>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/index.js"></script>
+</body>
+</html>

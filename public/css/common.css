@@ -1,0 +1,60 @@
+@font-face {
+  font-family: 'Brittany Signature';
+  src: url('/fonts/BrittanySignatureRegular/BrittanySignatureRegular.woff2') format('woff2'),
+       url('/fonts/BrittanySignatureRegular/BrittanySignatureRegular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Dancing Script', cursive;
+}
+
+.video-banner {
+  width: 100%;
+  max-width: 800px;
+  max-height: 800px;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.video-banner.show {
+  opacity: 1;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slider-container {
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.slider-container img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slider-container img.active {
+  opacity: 1;
+}

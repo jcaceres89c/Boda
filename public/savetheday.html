@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Confirmación de asistencia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Aniyah&family=Dancing+Script&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/savetheday.css">
+  
+</head>
+<body class="bg-pink-50 flex flex-col items-center justify-center min-h-screen text-center px-4">
+  <header>
+    <video id="bannerVideo" class="video-banner mx-auto" autoplay muted loop playsinline>
+      <source src="" type="video/mp4" />
+      Tu navegador no soporta el video.
+    </video>
+  </header>
+
+  <div id="content" class="fade-in-content">
+    <div class="texto-invitacion">Estamos felices de invitarte a :</div>
+    <div class="Subtitulo-2">Nuestra Boda</div>
+
+    <div class="w-full max-w-3xl mx-auto mb-8">
+      <div class="nombre-pareja">Briggitte</div>
+      <div class="nombre-pareja">&</div>
+      <div class="nombre-pareja">José Martín</div>
+    </div>
+
+    <div class="Subtitulo-1 text-4xl mt-10">Sábado, 13 de Setiembre del 2025</div>
+    <div class="Subtitulo-1 text-4xl mt-2">Solo faltan</div>
+
+    <div id="countdown" class="mt-8">
+      <div class="countdown-timer">
+        <span id="days">00</span>d :
+        <span id="hours">00</span>h :
+        <span id="minutes">00</span>m :
+        <span id="seconds">00</span>s
+      </div>
+    </div>
+  </div>
+
+  <div id="slider" class="slider-container hidden mt-12">
+    <img src="images/foto1.jpeg" class="active" alt="Foto 1" />
+    <img src="images/foto2.jpeg" alt="Foto 2" />
+    <img src="images/foto3.jpeg" alt="Foto 3" />
+    <img src="images/foto4.jpeg" alt="Foto 4" />
+    <img src="images/foto5.jpeg" alt="Foto 5" />
+  </div>
+
+
+  <div class="Subtitulo-2">Nuestro queridos padres</div>
+    <div class="Sub-nombres">Padres de la Novia</div>
+      <div class="nombres">Olga Ivonne Claussen Ramos</div>
+      <div class="nombres">Jorge Alberto Caceres Ramirez</div>
+    <div class="Sub-nombres">Padres del Novio</div>
+      <div class="nombres">Maria del Carmen Carrasco Castillo</div>
+      <div class="nombres">Bertha Noemí Castillo Zapata</div>
+      <div class="nombre-con-icono inline">
+         <span>José Domingo Carrasco Farro</span>
+         <img src="images/cruz.png" alt="Icono" class="icono-nombre" />
+      </div>
+
+  
+  <div class="Subtitulo-2 mt-12">Nuestro padrinos</div>
+    <div class="Sub-nombres">Padrinos del religioso</div>
+      <div class="nombres">Gladys Irene Claussen Ramos</div>
+      <div class="nombres">Gerardo Ismael Carrasco Castillo</div>
+
+    
+<div class="fondo-padrinos">
+  <div class="Sub-nombres">Padrinos de aros</div> 
+    <div class="nombres">Dante Kevin Velazco García</div>
+    <div class="nombres">Angela Oviedo Carquin</div>
+ </div>
+
+ <div class="grupo-testigos-linea">
+  <div class="grupo-testigo-civil">
+    <div class="Sub-nombres no-break">Testigos civil</div>
+    <div class="nombres no-break">David Gallardo O.</div>
+    <div class="nombres no-break">Angelo Yactayo C.</div>
+  </div>
+
+  <div class="grupo-testigo-religioso">
+    <div class="Sub-nombres no-break">Testigos religioso</div>
+    <div class="nombres no-break">Johan Carrasco R.</div>
+    <div class="nombres no-break">Lilia Gálvez R.</div>
+  </div>
+</div>
+
+<!--Ceremonia Religiosa-->
+<div class="text-center my-12 fondo-iglesia">
+  <div class="Subtitulo-2 mb-4 no-break">Ceremonia Religiosa</div>
+  <div class="Subtitulo-1 text-base mb-2">06:30 p.m.</div>
+  <div class="Subtitulo-1 text-2xl mb-6">Iglesia San José de Jesús María</div>
+  <img src="images/iglesia.jpg" alt="Iglesia" class="mx-auto rounded-lg shadow-lg max-w-xs h-auto" />
+
+  <!-- Enlace al mapa -->
+  <a href="https://maps.app.goo.gl/GWjHvmwQbmn6Mcp68" target="_blank" class="nombre-con-icono inline">
+    <img src="images/map.png" alt="Icono" class="icono-nombre" />
+    <span>ver mapa</span>
+  </a>
+</div>
+
+<!--Recepcion-->
+<div class="text-center my-7 fondo-salon">
+  <div class="Subtitulo-2 mb-4 no-break">Recepción</div>
+  <div class="Subtitulo-1 text-base mb-2">08:30 p.m.</div>
+  <div class="Subtitulo-1 text-2xl mb-6">Hollywood Los Olivos</div>
+  <img src="images/salon.png" alt="Salon" class="mx-auto rounded-lg shadow-lg max-w-xs h-auto" />
+
+  <!-- Enlace al mapa -->
+  <a href="https://maps.app.goo.gl/GWjHvmwQbmn6Mcp68" target="_blank" class="nombre-con-icono inline">
+    <img src="images/map.png" alt="Icono" class="icono-nombre" />
+    <span>ver mapa</span>
+  </a>
+</div>
+
+<!--Dress Code-->
+<div class="text-center my-7 px-4">
+  <div class="Subtitulo-2 mb-14 no-break">Dress Code</div>
+  <div class="formal text-4xl sm:text-3xl mb-20">Formal</div>
+
+  <img src="images/dresscode.png" alt="Dresscode" class="mx-auto max-w-xs h-auto mb-4 mr-6" />
+
+  <!-- Contenedor del texto -->
+  <div class="mx-auto max-w-md text-center">
+    <div class="texto1 no-break text-base sm:text-sm mb-1 mr-40">Por favor no usar blanco o similares</div>
+    <div class="texto2 text-sm sm:text-xs mb-3 -mt-1 mr-40">(Colores reservados para la novia)</div>
+    <div class="texto2 text-base sm:text-sm leading-relaxed mr-40">
+      Con mucho cariño, queremos compartir que esta celebración ha sido pensada como un momento especial para disfrutar entre adultos.
+      Agradecemos de antemano tu comprensión y esperamos contar con tu presencia para hacer de este día algo inolvidable.
+    </div>
+  </div>
+</div>
+
+<!--Sugerencia de Regalos-->
+<div class="text-center my-7 fondo-regalo">
+  <div class="Subtitulo-2 mb-4 no-break">Sugerencia de Regalo</div>
+    <!-- Contenedor del texto -->
+  <div class="mx-auto max-w-md text-center">
+    <div class="texto2 text-base sm:text-sm leading-relaxed mr-40">
+      Nuestro mejor regalo será celebrar contigo este día tan especial. Cualqioer detalle de tu parte será bienvenido con mucho cariño.
+    </div>
+    <div class="texto2 text-sm sm:text-xs mb-3 -mt-1 mr-40">Les dejamos nuestras sugerencias:</div>
+  </div>
+
+  <img src="images/sobres.png" alt="Salon" class="mx-auto max-w-xs h-auto mb-8" />
+
+<div class="nombre-con-icono inline">
+  <img src="images/yape.png" alt="Yape" class="icono-nombre" />
+  <span>998097290</span>
+  <img src="images/plin.png" alt="Plin" class="icono-nombre" />
+</div>
+
+<div class="texto2 text-sm sm:text-xs mb-3 -mt-1 mr-40">Briggitte Jannire Caceres Claussen</div>
+
+</div>
+
+<!--Confirmacion de Asistencia-->
+
+<div class="text-center my-7 px-4">
+  <div class="Subtitulo-2 mb-14 no-break">¡Te Esperamos!</div>
+  
+ <!-- Contenedor del texto -->
+  <div class="mx-auto max-w-md text-center">
+    <div class="texto2 text-base sm:text-sm leading-relaxed">
+      Tu presemcoa es importante para nosotros, por favor confirma tu asistencia
+    </div>
+  </div>
+  <button class="boton-confirmar">Confirmar</button>
+</div>
+
+<!--Imagen Final-->
+<div class="mx-auto max-w-md text-center">
+    <div class="texto2 text-base sm:text-sm leading-relaxed">
+      Un amor no necesita ser perfecto solo necesita ser verdadero
+    </div>
+  </div>
+
+
+<div class="imagen-final-container">
+  <img src="images/foto7.jpeg" alt="Foto final" class="imagen-final">
+</div>
+
+
+
+
+  
+
+
+  <script>
+    const videos = ['videos/video1.mp4', 'videos/video2.mp4', 'videos/video3.mp4'];
+    const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+    const videoEl = document.getElementById('bannerVideo');
+    const content = document.getElementById('content');
+    const slider = document.getElementById('slider');
+
+    videoEl.querySelector('source').src = randomVideo;
+    videoEl.load();
+
+    videoEl.addEventListener('canplay', () => {
+      videoEl.classList.add('show');
+      setTimeout(() => {
+        slider.classList.remove('hidden');
+        startSlider();
+        content.classList.add('show');
+      }, 1500);
+    });
+
+    function startSlider() {
+      const images = slider.querySelectorAll('img');
+      let current = 0;
+      setInterval(() => {
+        images[current].classList.remove('active');
+        current = (current + 1) % images.length;
+        images[current].classList.add('active');
+      }, 4000);
+    }
+  </script>
+
+  <script>
+    const eventDate = new Date("2025-09-13T19:00:00").getTime();
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeLeft = eventDate - now;
+
+      if (timeLeft <= 0) {
+        document.getElementById("countdown").innerHTML = "<p>¡El gran día ha llegado!</p>";
+        return;
+      }
+
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+      const seconds = Math.floor((timeLeft / 1000) % 60);
+
+      document.getElementById("days").textContent = String(days).padStart(2, "0");
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>

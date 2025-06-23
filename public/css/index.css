@@ -1,0 +1,27 @@
+/* index.css */
+
+.hero-text {
+  font-size: 2rem;
+  color: #8b5e66;
+}
+
+.nombre {
+  font-size: 4rem;
+  font-family: 'Brittany Signature', cursive;
+  color: #b48e12;
+}
+
+.confirm-button {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #b22222;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-button:hover {
+  background-color: #8b1a1a;
+}

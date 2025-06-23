@@ -1,0 +1,395 @@
+/* savetheday.css */
+
+/* Define una fuente personalizada llamada 'Brittany Signature' */
+@font-face {
+  font-family: 'Brittany Signature';
+  /* Ruta al archivo .woff2 y .woff con formato especificado */
+  src: url('../fonts/BrittanySignatureRegular/BrittanySignatureRegular.woff2') format('woff2'),
+       url('../fonts/BrittanySignatureRegular/BrittanySignatureRegular.woff') format('woff');
+  font-weight: normal;      /* Peso normal (no bold) */
+  font-style: normal;       /* Estilo normal (no cursiva) */
+}
+@font-face {
+  font-family: 'Aniyah';
+  src: url('../fonts/AniyahPersonalUseOnly-Regular/AniyahPersonalUseOnly-Regular.woff2') format('woff2'),
+       url('../fonts/AniyahPersonalUseOnly-Regular/AniyahPersonalUseOnly-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* Estilos para el video de portada */
+.video-banner {
+  width: 100%;                      /* Toma todo el ancho del contenedor */
+  max-width: 800px;                 /* Máximo ancho de 800px */
+  max-height: 800px;                /* Máxima altura de 800px */
+  object-fit: cover;                /* Recorta el video sin distorsión */
+  border-radius: 1rem;             /* Bordes redondeados */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  margin-bottom: 2rem;             /* Espacio inferior */
+  opacity: 0;                      /* Inicialmente invisible */
+  transition: opacity 1.5s ease-in-out; /* Transición suave de opacidad */
+}
+
+/* Cuando se le agrega la clase 'show', el video se vuelve visible */
+.video-banner.show {
+  opacity: 1;
+}
+
+/* Estilos para contenido que aparecerá con efecto "fade-in" */
+.fade-in-content {
+  opacity: 0;                       /* Comienza invisible */
+  transform: translateY(20px);      /* Desplazado hacia abajo 20px */
+  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out; /* Transiciones suaves */
+}
+
+/* Cuando se activa la clase 'show', se vuelve visible y sube a su posición */
+.fade-in-content.show {
+  opacity: 1;
+  transform: translateY(0);         /* Posición original */
+}
+
+/* Estilos para los nombres de la pareja */
+.nombre-pareja {
+  font-family: 'Brittany Signature', cursive; /* Usa la fuente personalizada */
+  font-size: 5rem;                 /* Tamaño grande */
+  color: #b48e12;                  /* Color dorado/mostaza */
+  margin: 0.5rem 0;                /* Margen superior e inferior */
+  line-height: 1.4;                /* Altura entre líneas */
+  overflow: visible;               /* No recorta el contenido que se desborda */
+}
+
+/* Texto general de invitación */
+.texto-invitacion {
+  font-family: 'Dancing Script', cursive; /* Fuente cursiva tipo manuscrita */
+  font-size: 2rem;                         /* Tamaño de letra */
+  color: #8b5e66;                          /* Color rosa/malva */
+  margin-bottom: 0.5rem;                  /* Espacio inferior */
+}
+
+/* Subtítulo decorativo */
+.Subtitulo-1 {
+  font-family: 'Dancing Script', cursive; /* Fuente elegante */
+  font-size: 2rem;                 /* Comentado, posiblemente para usar valor responsive */
+  color: #8b5e66;                         /* Color rosado */
+  margin-bottom: 2rem;                   /* Separación inferior */
+}
+
+/* Subtítulo decorativo */
+.Subtitulo-2 {
+  font-family: 'Aniyah', normal; /* Fuente elegante */
+  font-size: 2rem;                  /* Comentado, posiblemente para usar valor responsive */
+  color: #8b5e66;                         /* Color rosado */
+  margin-bottom: 2rem;                   /* Separación inferior */
+}
+
+/* Subtítulo decorativo */
+.Sub-nombres {
+ font-family: 'Dancing Script', cursive; /* Fuente cursiva tipo manuscrita */
+  font-size: 2rem;                         /* Tamaño de letra */
+  color: #8b5e66;                          /* Color rosa/malva */
+  margin-bottom: 0.5rem;                  /* Espacio inferior */
+  font-weight: bold;                      /* Texto en negrita */
+}
+
+
+
+/* Estilo del cronómetro de cuenta regresiva */
+.countdown-timer {
+  font-size: 2rem;           /* Tamaño del texto */
+  font-weight: bold;         /* Texto en negrita */
+  color: #b22222;            /* Color rojo oscuro */
+}
+
+/* Contenedor del slider de imágenes */
+.slider-container {
+  width: 100%;                /* Todo el ancho disponible */
+  max-width: 800px;           /* Máximo ancho */
+  height: 400px;              /* Altura fija */
+  margin: 0 auto 2rem auto;   /* Centrado con margen inferior */
+  position: relative;         /* Para posicionar elementos hijos con position: absolute */
+  overflow: hidden;           /* Oculta lo que se salga del contenedor */
+  border-radius: 1rem;        /* Bordes redondeados */
+}
+
+/* Imágenes del slider */
+.slider-container img {
+  position: absolute;         /* Para que se superpongan */
+  width: 100%;                /* Ocupan todo el ancho */
+  height: 100%;               /* Ocupan toda la altura */
+  object-fit: cover;          /* Ajuste de imagen sin deformar */
+  opacity: 0;                 /* Inicialmente invisibles */
+  transition: opacity 1s ease-in-out; /* Transición suave de opacidad */
+
+  /* Máscara para dar forma personalizada a las imágenes */
+  -webkit-mask-image: url('../images/mask-nubosa.png'); /* Para navegadores basados en WebKit */
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+
+  mask-image: url('../images/mask-nubosa.png');         /* Versión estándar */
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+/* Imagen activa del slider (visible) */
+.slider-container img.active {
+  opacity: 1; /* Se muestra */
+}
+
+/* Estilos responsivos para pantallas pequeñas (altura <700px o ancho <400px) */
+@media (max-height: 700px), (max-width: 400px) {
+  .countdown-timer {
+    font-size: clamp(24px, 5vw, 48px) !important; /* Tamaño dinámico entre 24px y 48px */
+    margin-top: 2rem !important;                  /* Espacio superior forzado */
+    margin-bottom: 3rem;                  /* Espacio inferior */
+  }
+  .texto-invitacion {
+    font-size: clamp(14px, 6vw, 20px) !important; /* Ajuste dinámico de tamaño de letra */
+  }
+  .nombre-pareja {
+    font-size: clamp(24px, 8vw, 64px) !important; /* Tamaño adaptable al ancho de pantalla */
+    line-height: 1.3;                             /* Más espacio entre líneas */
+  }
+  .Subtitulo-1 {
+    margin-top: 2rem !important;                 /* Separación superior forzada para subtítulo */
+  }
+  .Subtitulo-2 {
+    font-size: clamp(1rem, 5vw, 2rem);           /* Tamaño adaptable desde 1rem hasta 2rem */
+    margin-top: 2rem !important;                 /* Separación superior forzada para subtítulo */
+  }
+  .Sub-nombres{
+     font-weight: bold;
+  }
+  .slider-container {
+    margin-top: 2rem !important;                 /* Separación superior forzada para Imagenes del slide */
+  }
+  
+  .nombre-con-icono {
+    flex-direction: column;             /* Coloca ícono encima del texto si hay poco espacio */
+    align-items: flex-start;            /* Alineación a la izquierda */
+  }
+
+  .icono-nombre {
+    width: 20px;
+    height: 20px;
+  }
+ 
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  width: 180px; /* Ancho de la imagen o el contenedor */
+  height: 100%;
+  background-repeat: repeat-y; /* Repetir verticalmente */
+  background-size: contain;    /* Ajustar la imagen */
+  opacity: 0.25;               /* Desvanecido */
+  z-index: -1;                 /* Detrás de todo */
+  pointer-events: none;        /* No interfiere con clics */
+}
+
+/* Imagen a la izquierda */
+body::before {
+  left: 0;
+  background-image: url('../images/derecha.png'); /* Cambia a tu imagen izquierda */
+}
+
+/* Imagen a la derecha */
+body::after {
+  right: 0;
+  background-image: url('../images/izquierda.png'); /* Cambia a tu imagen derecha */
+}
+
+.fondo-padrinos {
+  position: relative;
+  padding: 2rem;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.fondo-padrinos::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/aros.png'); /* Cambia la ruta */
+  background-repeat: no-repeat;       /* No repetir */
+  background-position: center center; /* Centrado */
+  background-size: 250px auto;        /* Control de tamaño: ancho 300px */
+  opacity: 0.2;                      /* Transparente/desvanecido */
+  z-index: -1;
+}
+
+
+.nombre-con-icono.inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem; /* Ajusta el espacio si deseas más o menos separación */
+  white-space: nowrap; /* Impide que el contenido se divida en múltiples líneas */
+  font-size: 1rem;
+}
+
+.icono-nombre {
+  width: 18px;   /* Ajusta según tu imagen */
+  height: 18px;
+  vertical-align: middle;
+}
+
+.grupo-testigo-civil,
+.grupo-testigo-religioso {
+  flex: 1 1 45%;
+  max-width: 400px;
+}
+.grupo-testigos-linea {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: nowrap; /* <-- Esto evita que salte a otra línea */
+}
+.no-break {
+  white-space: nowrap;
+}
+
+.fondo-iglesia {
+  position: relative;
+  padding: 2rem;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.fondo-iglesia::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/iglesia_fondo2.png'); /* Cambia la ruta */
+  background-repeat: no-repeat;       /* No repetir */
+  background-position: center center; /* Centrado */
+  background-size: cover;        /* Control de tamaño: ancho 300px */
+  opacity: 0.2;                      /* Transparente/desvanecido */
+  z-index: -1;
+}
+
+.fondo-salon {
+  position: relative;
+  padding: 2rem;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.fondo-salon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/copas3.png'); /* Cambia la ruta */
+  background-repeat: no-repeat;       /* No repetir */
+  background-position: center center; /* Centrado */
+  background-size: cover;        /* Control de tamaño: ancho 300px */
+  opacity: 0.20;                      /* Transparente/desvanecido */
+  z-index: -1;
+}
+
+.formal{
+  font-family: 'Brittany Signature', cursive; /* Fuente cursiva tipo manuscrita */
+  font-size: 4rem;                         /* Tamaño de letra */
+  color: #8b5e66;                          /* Color rosa/malva */
+  margin-bottom: 0.5rem;                  /* Espacio inferior */
+  font-weight: bold;
+}
+
+.texto1{
+  font-family: 'Dancing Script', cursive; /* Fuente cursiva tipo manuscrita */
+  font-size: 2rem;                         /* Tamaño de letra */
+  color: #8b5e66;                          /* Color rosa/malva */
+  margin-bottom: 0.5rem;                  /* Espacio inferior */
+  font-weight: bold;
+}
+
+.texto2{
+ max-width: 600px;           /* Limita el ancho del texto */
+  margin: 0 auto;             /* Centra horizontalmente */
+  text-align: center;         /* Centra el texto */
+  font-size: 1.5rem;        /* Tamaño legible (18px aprox) */
+  color: #4b3b3b;             /* Color sobrio */
+  font-family: 'Dancing Script', cursive;
+  padding: 1rem;
+  line-height: 1.6;
+}
+
+/*Regalos Sugeridos*/
+
+.fondo-regalo {
+  position: relative;
+  padding: 2rem;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.fondo-regalo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/regalos.png'); /* Cambia la ruta */
+  background-repeat: no-repeat;       /* No repetir */
+  background-position: center center; /* Centrado */
+  background-size: cover;        /* Control de tamaño: ancho 300px */
+  opacity: 0.10;                      /* Transparente/desvanecido */
+  z-index: -1;
+}
+
+/* Boton Confirmar */
+.boton-confirmar {
+  background-color: #a0741f;         /* Color rosado */
+  color: white;                      /* Texto blanco */
+  padding: 0.5rem 1.5rem;            /* Espaciado interno */
+  border: none;                      /* Sin borde */
+  border-radius: 999px;              /* Borde totalmente redondeado (ambos lados) */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Relieve (sombra) */
+  font-size: 1rem;                   /* Tamaño del texto */
+  cursor: pointer;                  /* Cambia el cursor al pasar por encima */
+  transition: all 0.2s ease-in-out;  /* Transición suave */
+}
+
+.boton-confirmar:hover {
+  background-color: #8c6117;         /* Color más oscuro al pasar el cursor */
+}
+
+.boton-confirmar:active {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3); /* Relieve invertido al hacer clic */
+}
+
+/* Imágen Final */
+
+.imagen-final-container {
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.imagen-final {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  /* Aplicar la misma máscara del slider */
+  -webkit-mask-image: url('../images/mask-nubosa3.png');
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+
+  mask-image: url('../images/mask-nubosa3.png');
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  mask-position: center;
+
+  transition: opacity 1s ease-in-out;
+  opacity: 1;
+}
+
+
