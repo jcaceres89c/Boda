@@ -2,7 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('confirm-form');
   const input = document.getElementById('name-input');
   const error = document.getElementById('error-message');
+
+  const formSugerencias = document.getElementById('form-sugerencias');
   const sugerenciasDiv = document.getElementById('sugerencias');
+  const labelSelecciona = document.getElementById('selecciona-label');
 
   const formularios = {
     1: { url: 'https://forms.gle/wAZvgTQNhXVamq2DA', entry: 'entry.1079611635' },
@@ -38,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function mostrarSugerencias(opciones) {
     sugerenciasDiv.innerHTML = '';
-    error.textContent = 'Selecciona tu nombre:';
+    labelSelecciona.textContent = 'Selecciona tu nombre:';
 
     opciones.forEach(op => {
       const btn = document.createElement('button');
@@ -50,6 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       sugerenciasDiv.appendChild(btn);
     });
+
+    form.classList.add('hidden');
+    formSugerencias.classList.remove('hidden');
   }
 
   function redirigirAFormulario(invitado) {
@@ -67,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     error.textContent = '';
     sugerenciasDiv.innerHTML = '';
+    formSugerencias.classList.add('hidden');
 
     const nombreIngresado = normalizar(input.value);
     const partesIngresadas = nombreIngresado.split(' ');
@@ -77,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const partes = dato.partes;
       if (partesIngresadas.length > partes.length) return false;
 
-      // Coincidencia ordenada: cada palabra ingresada debe coincidir con el inicio de la palabra en la misma posición
       return partesIngresadas.every((palabra, idx) =>
         partes[idx]?.startsWith(palabra)
       );
