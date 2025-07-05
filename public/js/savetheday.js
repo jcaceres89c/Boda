@@ -7,15 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     video.classList.add('show');
   }
 
-  // Reemplazar el nombre si viene como query param
-  const params = new URLSearchParams(window.location.search);
-  const name = params.get('name');
-  if (name) {
-    const namePlaceholders = document.querySelectorAll('.nombre-invitado');
-    namePlaceholders.forEach(el => {
-      el.textContent = decodeURIComponent(name);
-    });
-  }
 
   // Cuenta regresiva
   const targetDate = new Date('2025-12-15T15:00:00');
