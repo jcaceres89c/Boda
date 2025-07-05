@@ -367,26 +367,15 @@ body::after {
   max-width: 800px;
   height: 400px;
   margin: 0 auto;
-  position: relative;
-  overflow: hidden;
+  /*position: relative;
+  overflow: hidden;*/
   border-radius: 1rem;
 }
 
 .imagen-final {
-  width: 50%;
-  height: 50%;
-  object-fit: cover;
-
-  /* Aplicar la misma máscara del slider 
-  -webkit-mask-image: url('../images/mask-nubosa3.png');
-  -webkit-mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-
-  mask-image: url('../images/mask-nubosa3.png');
-  mask-size: 100% 100%;
-  mask-repeat: no-repeat;
-  mask-position: center; */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 
   transition: opacity 1s ease-in-out;
   opacity: 1;
