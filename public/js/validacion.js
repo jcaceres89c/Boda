@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Diccionario con los formularios de Google y sus respectivos campos de entrada
   const formularios = {
-    1: { url: 'https://forms.gle/wAZvgTQNhXVamq2DA', entry: 'entry.1079611635' },
-    2: { url: 'https://forms.gle/3pCM7HNyEcXcLpex8', entry: 'entry.859038236' },
-    3: { url: 'https://forms.gle/Yxbcc9zczJ325TYm6', entry: 'entry.939276153' }
+    1: { url: 'https://docs.google.com/forms/d/e/1FAIpQLSdNM8J9WxjLZHbiyffD-gQ1fuIAnA7ah4iffXjbokj7T7J2aQ/viewform?usp=header', entry: 'entry.1079611635' },
+    2: { url: 'https://docs.google.com/forms/d/e/1FAIpQLSfXtEUJYCyN333m2a5xIoozquJKKh69a-JpE_8PC8tlnprIBg/viewform?usp=header', entry: 'entry.859038236' },
+    3: { url: 'https://docs.google.com/forms/d/e/1FAIpQLSfEwyfvrCK9fc0B7jdBSAGDlKnw6sJwQ8NKhLJbboTBVpphLw/viewform?usp=header', entry: 'entry.939276153' }
   };
 
   // Función para normalizar texto (quitar tildes, convertir a minúsculas, etc.)
