@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const response = await fetch('/invitados/invitados.csv');
+      const response = await fetch('../invitados/invitados.csv');
       if (!response.ok) throw new Error('No se pudo cargar el archivo CSV');
 
       const texto = await response.text();
@@ -77,5 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (!encontrado) {
-        error.textContent = 'Nombre no encontrado en la lista
+        error.textContent = 'Nombre no encontrado en la lista.';
+      }
 
+    } catch (err) {
+      console.error(err);
+      error.textContent = 'Ocurrió un error al validar. Intenta más tarde.';
+    }
+  });
+});
