@@ -73,11 +73,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!dataCSV.length) await cargarCSV();
 
-    const coincidencias = dataCSV.filter(dato =>
-      partesIngresadas.every(palabra =>
-        dato.partes.some(p => p.startsWith(palabra))
-      )
-    );
+    const coincidencias = dataCSV.filter(dato => {
+      const partes = dato.partes;
+      if (partesIngresadas.length > partes.length) return false;
+
+      // Coincidencia ordenada: cada palabra ingresada debe coincidir con el inicio de la palabra en la misma posición
+      return partesIngresadas.every((palabra, idx) =>
+        partes[idx]?.startsWith(palabra)
+      );
+    });
 
     if (coincidencias.length === 1) {
       redirigirAFormulario(coincidencias[0]);
