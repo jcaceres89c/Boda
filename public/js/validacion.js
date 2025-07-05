@@ -1,15 +1,19 @@
+// validacion_invitado.js
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('confirm-form');
   const input = document.getElementById('name-input');
   const error = document.getElementById('error-message');
   const sugerenciasDiv = document.getElementById('sugerencias');
 
+  // Diccionario con los formularios de Google y sus respectivos campos de entrada
   const formularios = {
-    1: { url: 'https://docs.google.com/forms/d/e/1FAIpQLSc2vFormA/viewform', entry: 'entry.1079611635' },
-    2: { url: 'https://docs.google.com/forms/d/e/1FAIpQLSc2vFormB/viewform', entry: 'entry.859038236' },
-    3: { url: 'https://docs.google.com/forms/d/e/1FAIpQLSc2vFormC/viewform', entry: 'entry.939276153' }
+    1: { url: 'https://forms.gle/wAZvgTQNhXVamq2DA', entry: 'entry.1079611635' },
+    2: { url: 'https://forms.gle/3pCM7HNyEcXcLpex8', entry: 'entry.859038236' },
+    3: { url: 'https://forms.gle/Yxbcc9zczJ325TYm6', entry: 'entry.939276153' }
   };
 
+  // Función para normalizar texto (quitar tildes, convertir a minúsculas, etc.)
   const normalizar = (str) =>
     str
       .toLowerCase()
@@ -20,34 +24,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let dataCSV = [];
 
+  // Cargar y procesar el archivo CSV
   async function cargarCSV() {
     const response = await fetch('../invitados/invitados.csv');
     const texto = await response.text();
-    const lineas = texto.split('\n').map(l => l.trim()).slice(1);
+    const lineas = texto.split('\n').map(l => l.trim()).slice(1); // Ignora encabezado
 
     dataCSV = lineas.map(linea => {
-      const [nombre, cantidadStr] = linea.split(';').map(s => s.trim());
+      const [nombre, paterno, materno, cantidadStr] = linea.split(';').map(s => s.trim());
+      const nombreCompleto = [nombre, paterno, materno].filter(Boolean).join(' ');
       return {
-        original: nombre,
-        normalizado: normalizar(nombre),
-        partes: normalizar(nombre).split(' '),
+        original: nombreCompleto,
+        normalizado: normalizar(nombreCompleto),
+        partes: normalizar(nombreCompleto).split(' '),
         cantidad: parseInt(cantidadStr)
       };
     });
   }
 
-  function redirigirAFormulario(invitado) {
-    const formConfig = formularios[invitado.cantidad];
-    if (!formConfig) {
-      error.textContent = `No hay formulario para ${invitado.cantidad} pase(s).`;
-      return;
-    }
-
-    const nombreEncoded = encodeURIComponent(invitado.original);
-    const url = `${formConfig.url}?${formConfig.entry}=${nombreEncoded}`;
-    window.open(url, '_blank'); // Abre el formulario en una nueva pestaña
-  }
-
+  // Mostrar lista de sugerencias si hay múltiples coincidencias
   function mostrarSugerencias(opciones) {
     sugerenciasDiv.innerHTML = '';
     error.textContent = 'Selecciona tu nombre:';
@@ -64,6 +59,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Redirigir al formulario con el nombre codificado
+  function redirigirAFormulario(invitado) {
+    const formConfig = formularios[invitado.cantidad];
+    if (!formConfig) {
+      error.textContent = `No hay formulario para ${invitado.cantidad} pase(s).`;
+      return;
+    }
+
+    const nombreEncoded = encodeURIComponent(invitado.original);
+    const url = `${formConfig.url}?${formConfig.entry}=${nombreEncoded}`;
+    window.open(url, '_blank'); // abrir en nueva pestaña
+  }
+
+  // Manejador del envío del formulario
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     error.textContent = '';
