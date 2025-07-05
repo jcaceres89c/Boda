@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!response.ok) throw new Error('No se pudo cargar el archivo CSV');
 
       const texto = await response.text();
+        console.log('Contenido del CSV:', texto); 
       const lineas = texto.split('\n').map(linea => linea.trim());
 
       let encontrado = false;
