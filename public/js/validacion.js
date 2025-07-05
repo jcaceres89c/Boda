@@ -2,87 +2,90 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('confirm-form');
   const input = document.getElementById('name-input');
   const error = document.getElementById('error-message');
+  const sugerenciasDiv = document.getElementById('sugerencias');
 
-  // Configura aquí los formularios y los campos "Nombre" de cada uno
-  // Configura aquí los formularios por cantidad de pases:
   const formularios = {
-    1: {
-      url: 'https://forms.gle/wAZvgTQNhXVamq2DA',
-      entry: 'entry.1079611635'  // Reemplaza con el ID real del campo "Nombre" para formulario 1 pase
-    },
-    2: {
-      url: 'https://forms.gle/3pCM7HNyEcXcLpex8',
-      entry: 'entry.859038236'  // Reemplaza con el ID real del campo "Nombre" para formulario 2 pases
-    },
-    3: {
-      url: 'https://forms.gle/Yxbcc9zczJ325TYm6',
-      entry: 'entry.939276153'  // Reemplaza con el ID real del campo "Nombre" para formulario 3 pases
-    }
+    1: { url: 'https://forms.gle/wAZvgTQNhXVamq2DA', entry: 'entry.1079611635' },
+    2: { url: 'https://forms.gle/3pCM7HNyEcXcLpex8', entry: 'entry.859038236' },
+    3: { url: 'https://forms.gle/Yxbcc9zczJ325TYm6', entry: 'entry.939276153' }
   };
 
-  // Normaliza tildes, mayúsculas, etc.
   const normalizar = (str) =>
     str
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^\w\s]/gi, "") // quita signos como '
+      .replace(/[^\w\s]/gi, "")
       .trim();
+
+  let dataCSV = [];
+
+  async function cargarCSV() {
+    const response = await fetch('../invitados/invitados.csv');
+    const texto = await response.text();
+    const lineas = texto.split('\n').map(l => l.trim()).slice(1);
+
+    dataCSV = lineas.map(linea => {
+      const [nombre, cantidadStr] = linea.split(';').map(s => s.trim());
+      return {
+        original: nombre,
+        normalizado: normalizar(nombre),
+        partes: normalizar(nombre).split(' '),
+        cantidad: parseInt(cantidadStr)
+      };
+    });
+  }
+
+  function mostrarSugerencias(opciones) {
+    sugerenciasDiv.innerHTML = '';
+    if (opciones.length === 0) {
+      error.textContent = 'No se encontraron coincidencias.';
+      return;
+    }
+
+    error.textContent = 'Selecciona tu nombre:';
+    opciones.forEach(op => {
+      const btn = document.createElement('button');
+      btn.textContent = op.original;
+      btn.className = 'block w-full bg-gray-200 hover:bg-gray-300 rounded p-2';
+      btn.onclick = () => redirigirAFormulario(op);
+      sugerenciasDiv.appendChild(btn);
+    });
+  }
+
+  function redirigirAFormulario(invitado) {
+    const formConfig = formularios[invitado.cantidad];
+    if (formConfig) {
+      const nombreEncoded = encodeURIComponent(invitado.original);
+      const redireccion = `${formConfig.url}?${formConfig.entry}=${nombreEncoded}`;
+      window.parent.location.href = redireccion;
+    } else {
+      error.textContent = `No hay formulario configurado para ${invitado.cantidad} pase(s).`;
+    }
+  }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     error.textContent = '';
+    sugerenciasDiv.innerHTML = '';
 
     const nombreIngresado = normalizar(input.value);
     const partesIngresadas = nombreIngresado.split(' ');
 
-    if (partesIngresadas.length < 2) {
-      error.textContent = 'Por favor, escribe al menos nombre y apellido.';
-      return;
-    }
+    if (!dataCSV.length) await cargarCSV();
 
-    try {
-      const response = await fetch('../invitados/invitados.csv');
-      if (!response.ok) throw new Error('No se pudo cargar el archivo CSV');
+    const coincidencias = dataCSV.filter(dato =>
+      partesIngresadas.every(palabra =>
+        dato.partes.includes(palabra)
+      )
+    );
 
-      const texto = await response.text();
-      const lineas = texto.split('\n').map(l => l.trim()).slice(1); // salta cabecera
-
-      let encontrado = false;
-
-      for (const linea of lineas) {
-        const [nombreCSV, cantidadStr] = linea.split(';').map(s => s.trim());
-        if (!nombreCSV || !cantidadStr) continue;
-
-        const cantidad = parseInt(cantidadStr);
-        const partesCSV = normalizar(nombreCSV).split(' ');
-
-        if (
-          partesCSV[0] === partesIngresadas[0] &&
-          partesCSV[1] === partesIngresadas[1]
-        ) {
-          encontrado = true;
-
-          const formConfig = formularios[cantidad];
-          if (formConfig) {
-            const nombreEncoded = encodeURIComponent(nombreCSV);
-            const redireccion = `${formConfig.url}?${formConfig.entry}=${nombreEncoded}`;
-            window.parent.location.href = redireccion;
-            return;
-          } else {
-            error.textContent = `No hay formulario configurado para ${cantidad} pase(s).`;
-            return;
-          }
-        }
-      }
-
-      if (!encontrado) {
-        error.textContent = 'Nombre no encontrado en la lista.';
-      }
-
-    } catch (err) {
-      console.error(err);
-      error.textContent = 'Ocurrió un error al validar. Intenta más tarde.';
+    if (coincidencias.length === 1) {
+      redirigirAFormulario(coincidencias[0]);
+    } else if (coincidencias.length > 1) {
+      mostrarSugerencias(coincidencias);
+    } else {
+      error.textContent = 'Nombre no encontrado en la lista.';
     }
   });
 });
