@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('name-input');
   const error = document.getElementById('error-message');
 
+  // Configura aquí los formularios y los campos "Nombre" de cada uno
   // Configura aquí los formularios por cantidad de pases:
   const formularios = {
     1: {
@@ -19,38 +20,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // Normaliza tildes, mayúsculas, etc.
+  const normalizar = (str) =>
+    str
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^\w\s]/gi, "") // quita signos como '
+      .trim();
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     error.textContent = '';
 
-    const nombreIngresado = input.value.trim().toLowerCase();
+    const nombreIngresado = normalizar(input.value);
+    const partesIngresadas = nombreIngresado.split(' ');
 
-    if (!nombreIngresado) {
-      error.textContent = 'Por favor, ingresa tu nombre.';
+    if (partesIngresadas.length < 2) {
+      error.textContent = 'Por favor, escribe al menos nombre y apellido.';
       return;
     }
 
     try {
-      const response = await fetch('../invitados/invitados.csv');
+      const response = await fetch('/invitados/invitados.csv');
       if (!response.ok) throw new Error('No se pudo cargar el archivo CSV');
 
       const texto = await response.text();
-        console.log('Contenido del CSV:', texto); 
-      const lineas = texto.split('\n').map(linea => linea.trim());
+      const lineas = texto.split('\n').map(l => l.trim()).slice(1); // salta cabecera
 
       let encontrado = false;
 
       for (const linea of lineas) {
-        const [nombre, cantidadStr] = linea.split(';').map(s => s.trim());
-        const cantidad = parseInt(cantidadStr);
-        const nombreCSV = nombre.toLowerCase();
+        const [nombreCSV, cantidadStr] = linea.split(';').map(s => s.trim());
+        if (!nombreCSV || !cantidadStr) continue;
 
-        if (nombreCSV === nombreIngresado) {
+        const cantidad = parseInt(cantidadStr);
+        const partesCSV = normalizar(nombreCSV).split(' ');
+
+        if (
+          partesCSV[0] === partesIngresadas[0] &&
+          partesCSV[1] === partesIngresadas[1]
+        ) {
           encontrado = true;
 
           const formConfig = formularios[cantidad];
           if (formConfig) {
-            const nombreEncoded = encodeURIComponent(nombre);
+            const nombreEncoded = encodeURIComponent(nombreCSV);
             const redireccion = `${formConfig.url}?${formConfig.entry}=${nombreEncoded}`;
             window.parent.location.href = redireccion;
             return;
@@ -62,12 +77,5 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (!encontrado) {
-        error.textContent = 'Nombre no encontrado en la lista.';
-      }
+        error.textContent = 'Nombre no encontrado en la lista
 
-    } catch (err) {
-      console.error(err);
-      error.textContent = 'Ocurrió un error al validar.';
-    }
-  });
-});
