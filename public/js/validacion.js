@@ -2,15 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('confirm-form');
   const input = document.getElementById('name-input');
   const error = document.getElementById('error-message');
-
-  const formSugerencias = document.getElementById('form-sugerencias');
   const sugerenciasDiv = document.getElementById('sugerencias');
-  const labelSelecciona = document.getElementById('selecciona-label');
 
   const formularios = {
-    1: { url: 'https://forms.gle/wAZvgTQNhXVamq2DA', entry: 'entry.1079611635' },
-    2: { url: 'https://forms.gle/3pCM7HNyEcXcLpex8', entry: 'entry.859038236' },
-    3: { url: 'https://forms.gle/Yxbcc9zczJ325TYm6', entry: 'entry.939276153' }
+    1: { url: 'https://docs.google.com/forms/d/e/1FAIpQLSc2vFormA/viewform', entry: 'entry.1079611635' },
+    2: { url: 'https://docs.google.com/forms/d/e/1FAIpQLSc2vFormB/viewform', entry: 'entry.859038236' },
+    3: { url: 'https://docs.google.com/forms/d/e/1FAIpQLSc2vFormC/viewform', entry: 'entry.939276153' }
   };
 
   const normalizar = (str) =>
@@ -39,55 +36,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function redirigirAFormulario(invitado) {
+    const formConfig = formularios[invitado.cantidad];
+    if (!formConfig) {
+      error.textContent = `No hay formulario para ${invitado.cantidad} pase(s).`;
+      return;
+    }
+
+    const nombreEncoded = encodeURIComponent(invitado.original);
+    const url = `${formConfig.url}?${formConfig.entry}=${nombreEncoded}`;
+    window.open(url, '_blank'); // Abre el formulario en una nueva pestaña
+  }
+
   function mostrarSugerencias(opciones) {
     sugerenciasDiv.innerHTML = '';
-    labelSelecciona.textContent = 'Selecciona tu nombre:';
+    error.textContent = 'Selecciona tu nombre:';
 
     opciones.forEach(op => {
       const btn = document.createElement('button');
       btn.textContent = op.original;
-      btn.className = 'block w-full bg-gray-200 hover:bg-gray-300 rounded p-2';
+      btn.className = 'block w-full bg-gray-100 border hover:bg-yellow-100 text-left px-4 py-2 rounded';
       btn.onclick = (e) => {
         e.preventDefault();
         redirigirAFormulario(op);
       };
       sugerenciasDiv.appendChild(btn);
     });
-
-    form.classList.add('hidden');
-    formSugerencias.classList.remove('hidden');
-  }
-
-  function redirigirAFormulario(invitado) {
-    const formConfig = formularios[invitado.cantidad];
-    if (formConfig) {
-      const nombreEncoded = encodeURIComponent(invitado.original);
-      const redireccion = `${formConfig.url}?${formConfig.entry}=${nombreEncoded}`;
-      window.parent.location.href = redireccion;
-    } else {
-      error.textContent = `No hay formulario configurado para ${invitado.cantidad} pase(s).`;
-    }
   }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     error.textContent = '';
     sugerenciasDiv.innerHTML = '';
-    formSugerencias.classList.add('hidden');
 
     const nombreIngresado = normalizar(input.value);
     const partesIngresadas = nombreIngresado.split(' ');
 
     if (!dataCSV.length) await cargarCSV();
 
-    const coincidencias = dataCSV.filter(dato => {
-      const partes = dato.partes;
-      if (partesIngresadas.length > partes.length) return false;
-
-      return partesIngresadas.every((palabra, idx) =>
-        partes[idx]?.startsWith(palabra)
-      );
-    });
+    const coincidencias = dataCSV.filter(dato =>
+      partesIngresadas.every(palabra =>
+        dato.partes.some(p => p.startsWith(palabra))
+      )
+    );
 
     if (coincidencias.length === 1) {
       redirigirAFormulario(coincidencias[0]);
