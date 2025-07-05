@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let encontrado = false;
 
       for (const linea of lineas) {
-        const [nombre, cantidadStr] = linea.split(',').map(s => s.trim());
+        const [nombre, cantidadStr] = linea.split(';').map(s => s.trim());
         const cantidad = parseInt(cantidadStr);
         const nombreCSV = nombre.toLowerCase();
 
