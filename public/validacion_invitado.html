@@ -1,23 +1,47 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Metadatos de la página -->
   <meta charset="UTF-8" />
-  <title>Confirmación de asistencia</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/common.css" />
-</head>
-<body class="bg-white text-gray-800 flex flex-col items-center justify-center min-h-screen p-4">
+  <title>Confirmación de asistencia</title> <!-- Título que aparece en la pestaña del navegador -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Escala adecuada en dispositivos móviles -->
 
+  <!-- Inclusión de Tailwind CSS desde CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+  <!-- Estilos personalizados comunes -->
+  <link rel="stylesheet" href="/css/common.css" />
+
+  <link rel="stylesheet" href="/css/validacion_invitado.css" />
+</head>
+
+<body class="bg-white text-gray-800 flex flex-col items-center justify-center min-h-screen p-4">
+  <!-- Contenedor principal con fondo blanco y texto gris, centrado vertical y horizontal -->
+
+  <!-- Formulario de confirmación -->
   <form id="confirm-form" class="w-full max-w-md bg-gray-100 p-6 rounded shadow">
-    <label for="name-input" class="block text-lg font-semibold mb-2">Escribe tu Nombre y Apellido:</label>
+    
+    <!-- Etiqueta para el campo de entrada del nombre -->
+    <label for="name-input" class="block text-lg font-semibold mb-2">
+      Escribe tu Nombre y Apellido:
+    </label>
+
+    <!-- Campo de entrada de texto -->
     <input type="text" id="name-input" class="w-full p-2 border border-gray-300 rounded mb-4" />
+
+    <!-- Contenedor para mostrar mensajes de error -->
     <p id="error-message" class="text-red-600 text-sm mb-4"></p>
-    <button type="submit" class="w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700 transition">Ver invitación</button>
+
+    <!-- Botón para enviar el formulario -->
+    <button type="submit" class="w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700 transition">
+      Ver invitación
+    </button>
   </form>
 
+  <!-- Script con funciones comunes utilizadas en el sitio -->
   <script src="/js/common.js"></script>
+
+  <!-- Script específico para la lógica de esta página (validación, redirección, etc.) -->
   <script src="/js/index.js"></script>
 </body>
 </html>

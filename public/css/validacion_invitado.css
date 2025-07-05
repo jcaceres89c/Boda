@@ -1,0 +1,8 @@
+/* Estilos para eliminar scroll y adaptar el contenido al iframe */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* evita scroll interno */
+  height: 100%;
+  width: 100%;
+}
