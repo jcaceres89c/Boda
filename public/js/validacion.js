@@ -38,17 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function mostrarSugerencias(opciones) {
     sugerenciasDiv.innerHTML = '';
-    if (opciones.length === 0) {
-      error.textContent = 'No se encontraron coincidencias.';
-      return;
-    }
-
     error.textContent = 'Selecciona tu nombre:';
+
     opciones.forEach(op => {
       const btn = document.createElement('button');
       btn.textContent = op.original;
       btn.className = 'block w-full bg-gray-200 hover:bg-gray-300 rounded p-2';
-      btn.onclick = () => redirigirAFormulario(op);
+      btn.onclick = (e) => {
+        e.preventDefault();
+        redirigirAFormulario(op);
+      };
       sugerenciasDiv.appendChild(btn);
     });
   }
@@ -76,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const coincidencias = dataCSV.filter(dato =>
       partesIngresadas.every(palabra =>
-        dato.partes.includes(palabra)
+        dato.partes.some(p => p.startsWith(palabra))
       )
     );
 
